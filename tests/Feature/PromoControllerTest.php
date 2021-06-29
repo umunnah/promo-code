@@ -6,7 +6,6 @@ use App\Models\Event;
 use App\Models\Promo;
 use Tests\BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PromoControllerTest extends BaseTestCase
 {
@@ -77,5 +76,26 @@ class PromoControllerTest extends BaseTestCase
         $response = $this->get('/api/v1/promo-codes?paginate=20&status=1');
 
         $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function test_deactivate_promo_code()
+    {
+        $promo = Promo::factory(['status' => 1])->create();
+        $response = $this->patch('/api/v1/promo/'.$promo->id.'/de-activate');
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function test_deactivate_promo_code_with_invalid_promo_id()
+    {
+        $response = $this->patch('/api/v1/promo/1/de-activate');
+
+        $response->assertStatus(404);
     }
 }

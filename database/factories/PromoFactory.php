@@ -26,7 +26,7 @@ class PromoFactory extends Factory
         return [
             'code' => $this->faker->bankAccountNumber,
             'radius' => $this->faker->numberBetween(2,500),
-            'amount' => 5.00,
+            'amount' => $this->faker->numberBetween(5,100),
             'expire_at' => date("Y-m-d H:i:s", strtotime("+7 day")),
             'status' => $this->faker->numberBetween(0,1),
             'event_id' => $event->id,

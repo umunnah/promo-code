@@ -34,4 +34,9 @@ class PromoRepository extends BaseRepository
 			->with('event')
             ->latest()->paginate($perPage);
     }
+
+    public function deActivate(int $promoId) 
+    {
+        return $this->update($promoId,['status' => 0]);
+    }
 }

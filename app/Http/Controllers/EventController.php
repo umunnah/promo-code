@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use Illuminate\Http\Request;
+
 use App\Http\Request\StoreEvent;
 use App\Http\Response\ApiResponse;
 use App\Repositories\EventRepository;
+use App\Helpers\Functions\PaginationHelper;
 
 class EventController extends Controller
 {
@@ -16,6 +16,7 @@ class EventController extends Controller
     {
         $this->eventRepository = $eventRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +24,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = $this->eventRepository->getEvents();
+        return ApiResponse::sendResponse(PaginationHelper::paginate($events), trans('successful'));
     }
 
     /**
@@ -37,48 +39,5 @@ class EventController extends Controller
         return ApiResponse::sendResponse($event, "successful", true,201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Event $event)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Event $event)
-    {
-        //
-    }
+   
 }

@@ -21,7 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     
     Route::post('/users','UserController@store');
+    // event routes
     Route::post('/events','EventController@store');
+    Route::get('/events', 'EventController@index');
 
     // promo routes
     Route::post('/promos', 'PromoController@store');

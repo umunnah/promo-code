@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Event;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\BaseTestCase;
 
@@ -38,5 +38,26 @@ class EventControllerTest extends BaseTestCase
         $response = $this->post('/api/v1/events',$data);
 
         $response->assertStatus(422);
+    }
+      /**
+     * @test
+     */
+    public function test_get_all_promo_codes()
+    {
+        Event::factory(20)->create();
+        $response = $this->get('/api/v1/events');
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function test_get_all_promo_codes_with_specified_pagination()
+    {
+        Event::factory(20)->create();
+        $response = $this->get('/api/v1/events?paginate=20&status=1');
+
+        $response->assertStatus(200);
     }
 }

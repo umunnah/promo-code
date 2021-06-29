@@ -42,9 +42,10 @@ class PromoController extends Controller
     /**
      * @return \Illuminate\Http\Response
      */
-    public function deActivate(Promo $promo)
+    public function deActivate($promoId)
     {
-        //
+        $result = $this->promoRepository->deActivate($promoId);
+        return ApiResponse::sendResponse($result,trans('de-activated'));
     }
 
     /**
