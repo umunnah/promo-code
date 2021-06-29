@@ -98,4 +98,36 @@ class PromoControllerTest extends BaseTestCase
 
         $response->assertStatus(404);
     }
+
+    /**
+     * @test
+     */
+    public function test_update_promo_radius()
+    {
+        $promo = Promo::factory()->create();
+        $response = $this->patch('/api/v1/promo/'.$promo->id.'/radius',['radius' => 50]);
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function test_update_promo_radius_validation()
+    {
+        $promo = Promo::factory()->create();
+        $response = $this->patch('/api/v1/promo/'.$promo->id.'/radius',[]);
+
+        $response->assertStatus(422);
+    }
+
+    /**
+     * @test
+     */
+    public function test_update_promo_radius_with_invalid_promo_id()
+    {
+        $response = $this->patch('/api/v1/promo/1/radius',['radius' => 50]);
+
+        $response->assertStatus(404);
+    }
 }

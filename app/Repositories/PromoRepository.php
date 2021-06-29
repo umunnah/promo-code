@@ -39,4 +39,9 @@ class PromoRepository extends BaseRepository
     {
         return $this->update($promoId,['status' => 0]);
     }
+
+    public function updateRadius(int $promoId, int $radius) 
+    {
+        return $this->update($promoId,['radius' => $radius]);
+    }
 }

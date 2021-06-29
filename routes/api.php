@@ -29,4 +29,5 @@ Route::prefix('v1')->group(function () {
     Route::post('/promos', 'PromoController@store');
     Route::get('/promo-codes', 'PromoController@index');
     Route::patch('/promo/{promoId}/de-activate', 'PromoController@deActivate');
+    Route::patch('/promo/{promoId}/radius', 'PromoController@updateRadius');
 });

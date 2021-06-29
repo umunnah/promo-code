@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Request\StorePromo;
 use App\Http\Response\ApiResponse;
 use App\Repositories\PromoRepository;
+use App\Http\Request\UpdatePromoRadius;
 use App\Helpers\Functions\PaginationHelper;
 
 class PromoController extends Controller
@@ -49,25 +50,13 @@ class PromoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Promo  $promo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Promo $promo)
+    public function updateRadius(UpdatePromoRadius $request, $promoId)
     {
-        //
+        $result = $this->promoRepository->updateRadius($promoId,$request->radius);
+        return ApiResponse::sendResponse($result,trans('updated promo radius'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Promo  $promo
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Promo $promo)
-    {
-        //
-    }
+    
 }
